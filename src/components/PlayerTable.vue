@@ -1,6 +1,6 @@
 <template>
            
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth" :class="{'is-loading': isLoading}">
 		<thead>
 			<tr>
 				<th>Name</th>
@@ -67,7 +67,8 @@ export default {
       sortDirectionLabels: ["desc", "asc"],
       PRIMARY_SORT: 0,
       SECONDARY_SORT: 1,
-      TERTIARY_SORT: 2
+      TERTIARY_SORT: 2,
+      isLoading: true
     };
   },
   computed: {
@@ -75,30 +76,34 @@ export default {
       return this.sort(this.players);
     }
   },
-  created() {
-    fetch("/data/players.json", {
+  async created() {
+    const response = await fetch("/data/players.json", {
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       }
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(json => {
-        this.players = json;
-        this.positions = this.players.reduce((map, obj) => {
-          if (map[obj.position] === undefined) {
-            map[obj.position] = [obj];
-          } else {
-            map[obj.position].push(obj);
-          }
-          return map;
-        }, {});
-      });
+    });
+    this.players = await response.json();
+
+    // this.positions = this.players.reduce((map, obj) => {
+    //   const currentPosition = map[obj.position];
+    //   if (typeof currentPosition === "undefined") {
+    //     return {
+    //       ...map,
+    //       [obj.position]: [obj]
+    //     };
+    //   }
+    //   return {
+    //     ...map,
+    //     [obj.position]: [...currentPosition, obj]
+    //   };
+    // }, {});
   },
   methods: {
     sort(players) {
-      return _.orderBy(players, this.sortBy, this.sortDir);
+      this.isLoading = true;
+      const sorted = _.orderBy(players, this.sortBy, this.sortDir);
+      this.isLoading = false;
+      return sorted;
     },
     selectionClass(fieldName) {
       const index = this.sortBy.indexOf(fieldName);

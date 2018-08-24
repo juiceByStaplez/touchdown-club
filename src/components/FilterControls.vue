@@ -1,5 +1,5 @@
 <template>
-<nav class="panel w-1/4">
+<nav class="panel w-1/4 flex flex-col">
   <p class="panel-heading">
     filters
   </p>
@@ -18,12 +18,12 @@
     <a>sources</a>
     <a>forks</a>
   </p> -->
-  <a class="panel-block is-active">
-    <span class="panel-icon">
-      <i class="fas fa-book" aria-hidden="true"></i>
-    </span>
-    positions
-  </a>
+
+  <CollapsibleBlock 
+    v-for="block in filterBlocks" 
+    :key="block.id"
+    :block="block" />
+
   <div class="panel-block">
     <button class="button is-link is-outlined is-fullwidth">
       reset all filters
@@ -33,14 +33,27 @@
 </template>
 
 <script>
-import PositionFilters from "./PositionFilters";
+const filterBlocks = [
+  {
+    id: "positions",
+    status: 1,
+    title: "Positions",
+    collapsed: false,
+    collapsible: true,
+    component: "PositionFilters",
+    icon: "fa-user-secret"
+  }
+];
+import CollapsibleBlock from "./CollapsibleBlock";
 
 export default {
   components: {
-    PositionFilters
+    CollapsibleBlock
   },
   data() {
-    return {};
+    return {
+      filterBlocks: filterBlocks
+    };
   }
 };
 </script>
