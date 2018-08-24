@@ -1,24 +1,26 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app" class="flex justify-between p-1">
+    <FilterControls />
+    <PlayerTable />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import FilterControls from "./components/FilterControls";
+import PlayerTable from "./components/PlayerTable";
 
 export default {
-  name: 'app',
+  name: "app",
   components: {
-    HelloWorld
+    FilterControls,
+    PlayerTable
   }
-}
+};
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
