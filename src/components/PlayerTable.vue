@@ -4,6 +4,7 @@
 		<thead>
 			<tr>
 				<th>Name</th>
+        <th>Position</th>
 				<th 
                 class="is-clickable"
                 :class="selectionClass('overall')"
@@ -26,6 +27,7 @@
 		<tbody class="overflow-y-scroll" style="height: 50vh;">
 			<tr :key="player.primaryKey" v-for="player in filteredPlayers">
 				<td class="whitespace-no-wrap">{{ player.firstName }} {{ player.lastName }}</td>
+        <td>{{ player.position }} </td>
 				<td>{{ player.overall }}</td>
 				<td v-for="(field, index) in rating_fields" :key="index" v-show="field.enabled"> {{ player[field.name] }} </td>
 			</tr>
@@ -35,6 +37,7 @@
 
 <script>
 import fields from "../fields";
+import positions from "../positions";
 import _ from "lodash";
 console.log(window.location.host);
 const api_uri =
@@ -64,10 +67,10 @@ export default {
   data() {
     return {
       players: [],
-      positions: {},
+      positions: positions,
       rating_fields: fields,
-      sortBy: ["overall"],
-      sortDir: ["desc"],
+      sortBy: ["overall", "speed"],
+      sortDir: ["desc", "desc"],
       sortDirectionLabels: ["desc", "asc"],
       PRIMARY_SORT: 0,
       SECONDARY_SORT: 1,
@@ -77,79 +80,94 @@ export default {
   },
   computed: {
     filteredPlayers: function() {
-      return this.sort(this.players);
+      return this.players;
     }
   },
-  async created() {
-    const response = await fetch(`${api_uri}/players`, {
-      headers: {
-        "Content-Type": "application/json; charset=utf-8"
-      }
-    });
-    this.players = await response.json();
-
-    this.players = this.players.map(p => {
-      return {
-        firstName: p.first_name,
-        lastName: p.last_name,
-        overall: p.overall,
-        speed_rating: p.speed,
-        acceleration_rating: p.acceleration,
-        trucking_rating: p.trucking,
-        catching_rating: p.catching,
-        breakTackle_rating: p.break_tackle,
-        jumping_rating: p.jumping,
-        bCVision_rating: p.bc_vision,
-        stiffArm_rating: p.stiff_arm,
-        carrying_rating: p.carrying,
-        agility_rating: p.agility,
-        elusiveness_rating: p.juke_move,
-        jukeMove_rating: p.elusiveness,
-        spinMove_rating: p.spin_move,
-        awareness_rating: p.awareness,
-        throwPower_rating: p.throw_power,
-        kickReturn_rating: p.kick_return,
-        leadBlock_rating: p.lead_block,
-        strength_rating: p.strength,
-        playAction_rating: p.play_action,
-        pursuit_rating: p.pursuit,
-        catchInTraffic_rating: p.catch_in_traffic,
-        spectacularCatch_rating: p.spectacular_catch,
-        shortRouteRunning_rating: p.short_route_running,
-        mediumRouteRunning_rating: p.medium_route_running,
-        deepRouteRunning_rating: p.deep_route_running,
-        finesseMoves_rating: p.finesse_moves,
-        powerMoves_rating: p.power_moves,
-        runBlock_rating: p.run_block,
-        tackle_rating: p.tackle,
-        injury_rating: p.injury,
-        throwAccuracyShort_rating: p.short_throw_accuracy,
-        throwAccuracyMid_rating: p.mid_throw_accuracy,
-        throwAccuracyDeep_rating: p.deep_throw_accuracy,
-        throwUnderPressure_rating: p.throw_under_pressure,
-        playRecognition_rating: p.play_recognition,
-        breakSack_rating: p.break_sack,
-        runBlockPower_rating: p.run_block_powr,
-        toughness_rating: p.toughness,
-        throwOnTheRun_rating: p.throw_on_the_run,
-        manCoverage_rating: p.man_coverage,
-        zoneCoverage_rating: p.zone_coverage,
-        release_rating: p.release,
-        hitPower_rating: p.hit_power,
-        kickAccuracy_rating: p.kick_accuracy,
-        passBlockPower_rating: p.pass_block_pwr,
-        impactBlocking_rating: p.impact_blocking,
-        stamina_rating: p.stamina,
-        kickPower_rating: p.kick_power,
-        passBlock_rating: p.pass_block,
-        press_rating: p.press,
-        blockShedding_rating: p.block_sheddig,
-        runBlockFinesse_rating: p.run_block_finesse,
-        passBlockFinesse_rating: p.pass_block_finesse
-      };
-    });
+  created() {
+    this.getPlayers();
   },
   methods: {
+    async getPlayers() {
+      let url = new URL(api_uri + "/players");
+      const params = {
+        positions: this.positions.map(p => p.abbreviation),
+        sortBy: this.sortBy.map(s =>
+          s
+            .replace("_rating", "")
+            .replace(/([a-zA-Z])(?=[A-Z])/g, "$1_")
+            .toLowerCase()
+        ),
+        sortDir: this.sortDir
+      };
+      url.search = new URLSearchParams(params);
+      const response = await fetch(url, {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8"
+        }
+      });
+      this.players = await response.json();
+      this.players = this.players.map(p => {
+        return {
+          firstName: p.first_name,
+          lastName: p.last_name,
+          position: p.position,
+          overall: p.overall,
+          speed_rating: p.speed,
+          acceleration_rating: p.acceleration,
+          trucking_rating: p.trucking,
+          catching_rating: p.catching,
+          breakTackle_rating: p.break_tackle,
+          jumping_rating: p.jumping,
+          bCVision_rating: p.bc_vision,
+          stiffArm_rating: p.stiff_arm,
+          carrying_rating: p.carrying,
+          agility_rating: p.agility,
+          elusiveness_rating: p.juke_move,
+          jukeMove_rating: p.elusiveness,
+          spinMove_rating: p.spin_move,
+          awareness_rating: p.awareness,
+          throwPower_rating: p.throw_power,
+          kickReturn_rating: p.kick_return,
+          leadBlock_rating: p.lead_block,
+          strength_rating: p.strength,
+          playAction_rating: p.play_action,
+          pursuit_rating: p.pursuit,
+          catchInTraffic_rating: p.catch_in_traffic,
+          spectacularCatch_rating: p.spectacular_catch,
+          shortRouteRunning_rating: p.short_route_running,
+          mediumRouteRunning_rating: p.medium_route_running,
+          deepRouteRunning_rating: p.deep_route_running,
+          finesseMoves_rating: p.finesse_moves,
+          powerMoves_rating: p.power_moves,
+          runBlock_rating: p.run_block,
+          tackle_rating: p.tackle,
+          injury_rating: p.injury,
+          throwAccuracyShort_rating: p.short_throw_accuracy,
+          throwAccuracyMid_rating: p.mid_throw_accuracy,
+          throwAccuracyDeep_rating: p.deep_throw_accuracy,
+          throwUnderPressure_rating: p.throw_under_pressure,
+          playRecognition_rating: p.play_recognition,
+          breakSack_rating: p.break_sack,
+          runBlockPower_rating: p.run_block_powr,
+          toughness_rating: p.toughness,
+          throwOnTheRun_rating: p.throw_on_the_run,
+          manCoverage_rating: p.man_coverage,
+          zoneCoverage_rating: p.zone_coverage,
+          release_rating: p.release,
+          hitPower_rating: p.hit_power,
+          kickAccuracy_rating: p.kick_accuracy,
+          passBlockPower_rating: p.pass_block_pwr,
+          impactBlocking_rating: p.impact_blocking,
+          stamina_rating: p.stamina,
+          kickPower_rating: p.kick_power,
+          passBlock_rating: p.pass_block,
+          press_rating: p.press,
+          blockShedding_rating: p.block_sheddig,
+          runBlockFinesse_rating: p.run_block_finesse,
+          passBlockFinesse_rating: p.pass_block_finesse
+        };
+      });
+    },
     sort(players) {
       this.isLoading = true;
       const sorted = _.orderBy(players, this.sortBy, this.sortDir);
@@ -175,6 +193,7 @@ export default {
       this.sortBy.splice(targetIndex, 0, field.name);
       this.sortDir.splice(targetIndex, 0, this.sortDirectionLabels[field.sort]);
       this.trimSorting();
+      this.getPlayers();
     },
     trimSorting() {
       this.sortBy = this.sortBy.slice(0, 3);

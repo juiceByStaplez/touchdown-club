@@ -1,0 +1,23 @@
+export default [
+  { abbreviation: "C" },
+  { abbreviation: "CB" },
+  { abbreviation: "DT" },
+  { abbreviation: "FB" },
+  { abbreviation: "FS" },
+  { abbreviation: "HB" },
+  { abbreviation: "K" },
+  { abbreviation: "LE" },
+  { abbreviation: "LG" },
+  { abbreviation: "LOLB" },
+  { abbreviation: "LT" },
+  { abbreviation: "MLB" },
+  { abbreviation: "P" },
+  { abbreviation: "QB" },
+  { abbreviation: "RE" },
+  { abbreviation: "RG" },
+  { abbreviation: "ROLB" },
+  { abbreviation: "RT" },
+  { abbreviation: "SS" },
+  { abbreviation: "TE" },
+  { abbreviation: "WR" }
+];

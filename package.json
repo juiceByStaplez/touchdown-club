@@ -9,6 +9,7 @@
     "lint-autofix": "eslint --ext .js,.vue src/components --fix"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bulma": "^0.7.1",
     "dotenv": "^6.0.0",
     "lodash": "^4.17.10",
