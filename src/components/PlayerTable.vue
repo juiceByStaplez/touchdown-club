@@ -86,11 +86,18 @@ export default {
   created() {
     this.getPlayers();
   },
+  mounted() {
+    this.$eventHub.on("toggle-position", position => {
+      this.togglePosition(position);
+    });
+  },
   methods: {
     async getPlayers() {
       let url = new URL(api_uri + "/players");
       const params = {
-        positions: this.positions.map(p => p.abbreviation),
+        positions: this.positions
+          .filter(p => p.enabled)
+          .map(p => p.abbreviation),
         sortBy: this.sortBy.map(s =>
           s
             .replace("_rating", "")
@@ -193,6 +200,14 @@ export default {
       this.sortBy.splice(targetIndex, 0, field.name);
       this.sortDir.splice(targetIndex, 0, this.sortDirectionLabels[field.sort]);
       this.trimSorting();
+      this.getPlayers();
+    },
+    togglePosition(pos) {
+      const position = this.positions.find(
+        p => p.abbreviation === pos.abbreviation
+      );
+      position.enabled = !position.enabled;
+
       this.getPlayers();
     },
     trimSorting() {
