@@ -25,7 +25,7 @@
     :block="block" />
 
   <div class="panel-block">
-    <button class="button is-link is-outlined is-fullwidth">
+    <button class="button is-link is-outlined is-fullwidth" @click="resetFilters">
       reset all filters
     </button>
   </div>
@@ -64,6 +64,11 @@ export default {
         this.$eventHub.emit("search-by-name", this.query);
       }
     }, 400),
+    resetFilters() {
+      this.query = "";
+      this.$eventHub.emit("reset-search");
+      this.$eventHub.emit("reset-position-filters");
+    },
     resetSearch: _.debounce(function() {
       if (this.query.length === 0) {
         this.$eventHub.emit("reset-search");

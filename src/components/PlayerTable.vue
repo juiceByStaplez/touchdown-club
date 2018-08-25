@@ -68,7 +68,7 @@ export default {
     return {
       nameQuery: "",
       players: [],
-      positions: positions,
+      positions: _.cloneDeep(positions),
       rating_fields: fields,
       sortBy: ["overall", "speed"],
       sortDir: ["desc", "desc"],
@@ -82,7 +82,6 @@ export default {
   computed: {
     filteredPlayers: function() {
       let players = this.players;
-      console.log(players);
       if (this.nameQuery.length > 0) {
         players = fuzzysort
           .go(this.nameQuery, players, {
@@ -101,12 +100,21 @@ export default {
       this.togglePosition(position);
     });
 
+    this.$eventHub.on("select-only-position", position => {
+      this.selectOnly(position);
+    });
+
     this.$eventHub.on("search-by-name", query => {
       this.nameSearch(query);
     });
 
     this.$eventHub.on("reset-search", () => {
       this.resetSearch();
+    });
+
+    this.$eventHub.on("reset-position-filters", () => {
+      this.positions = _.cloneDeep(positions);
+      this.getPlayers();
     });
   },
   methods: {
@@ -212,6 +220,14 @@ export default {
         obj[selectionClasses[index]] = true;
       }
       return obj;
+    },
+    selectOnly(pos) {
+      this.positions = this.positions.map(p =>
+        Object.assign(p, {
+          enabled: p.abbreviation === pos.abbreviation
+        })
+      );
+      this.getPlayers();
     },
     setSort(targetIndex, field) {
       const index = this.sortBy.indexOf(field.name);
