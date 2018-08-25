@@ -36,7 +36,11 @@
 <script>
 import fields from "../fields";
 import _ from "lodash";
-
+console.log(window.location.host);
+const api_uri =
+  window.location.host.indexOf("localhost") > -1
+    ? "http://localhost:3000"
+    : "http://api.touchdownclub.net:3000";
 // eslint-disable-no-unused-vars
 
 // const byField = field => (x, y) => x[field] - y[field];
@@ -77,7 +81,7 @@ export default {
     }
   },
   async created() {
-    const response = await fetch("http://localhost:3000/players", {
+    const response = await fetch(`${api_uri}/players`, {
       headers: {
         "Content-Type": "application/json; charset=utf-8"
       }
