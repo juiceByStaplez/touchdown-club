@@ -43,7 +43,7 @@ console.log(window.location.host);
 const api_uri =
   window.location.host.indexOf("localhost") > -1
     ? "http://localhost:3000"
-    : "http://api.touchdownclub.net:3000";
+    : "https://api.touchdownclub.net:3000";
 // eslint-disable-no-unused-vars
 
 // const byField = field => (x, y) => x[field] - y[field];
