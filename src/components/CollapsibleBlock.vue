@@ -1,12 +1,12 @@
 <template>
-    <a class="panel-block panel-block-collapsible flex-col" :class="collapseClass" >
-      <header class="panel-header flex">
+    <a class="panel-block panel-block-collapsible flex-col" @click="isCollapsed = !isCollapsed">
+      <header class="panel-header flex items-center">
            <span class="panel-icon">
-            <i class="fas text-teal-dark" :class="block.icon" aria-hidden="true" />
+            <i class="fas text-green-darker" :class="block.icon" aria-hidden="true" />
         </span>
         {{ block.title }}
       </header>
-        <div class="panel-body">
+        <div class="panel-body" :class="collapseClass">
           <component :is="block.component" />
         </div>
     </a>
@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      isCollapsed: false,
+      isCollapsed: true,
       collapsible: true
     };
   },
@@ -50,13 +50,14 @@ export default {
 </script>
 
 <style lang="scss">
-.panel-block-collapsible {
+.panel-body {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+  max-height: 26.1rem;
 
   &.is-collapsed {
     transition: max-height 0.2s ease-out;
-    max-height: 60px;
+    max-height: 0;
   }
 }
 </style>

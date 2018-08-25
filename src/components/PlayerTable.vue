@@ -18,6 +18,7 @@
                     :key="index" 
                     v-show="field.enabled" 
                     class="whitespace-no-wrap is-clickable"
+                    :title="field.readable"
                     :class="selectionClass(field.name)"
                     @click.alt.exact="setSort(SECONDARY_SORT, field)"
                     @click.ctrl.exact="setSort(TERTIARY_SORT, field)"
