@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "eslint --ext .js,.vue src/components",
-    "lint-autofix": "eslint --ext .js,.vue src/components --fix"
+    "lint-autofix": "eslint --ext .js,.vue src/components --fix",
+    "deploy": "npm run build && now --public && now alias"
   },
   "dependencies": {
     "bulma": "^0.7.1",
