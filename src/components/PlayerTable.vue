@@ -39,7 +39,7 @@
 import fields from "../fields";
 import positions from "../positions";
 import _ from "lodash";
-console.log(window.location.host);
+import fuzzysort from "fuzzysort";
 const api_uri =
   window.location.host.indexOf("localhost") > -1
     ? "http://localhost:3000"
@@ -66,6 +66,7 @@ export default {
   },
   data() {
     return {
+      nameQuery: "",
       players: [],
       positions: positions,
       rating_fields: fields,
@@ -80,7 +81,16 @@ export default {
   },
   computed: {
     filteredPlayers: function() {
-      return this.players;
+      let players = this.players;
+      console.log(players);
+      if (this.nameQuery.length > 0) {
+        players = fuzzysort
+          .go(this.nameQuery, players, {
+            keys: ["firstName", "lastName"]
+          })
+          .map(r => r.obj);
+      }
+      return players;
     }
   },
   created() {
@@ -89,6 +99,14 @@ export default {
   mounted() {
     this.$eventHub.on("toggle-position", position => {
       this.togglePosition(position);
+    });
+
+    this.$eventHub.on("search-by-name", query => {
+      this.nameSearch(query);
+    });
+
+    this.$eventHub.on("reset-search", () => {
+      this.resetSearch();
     });
   },
   methods: {
@@ -174,6 +192,12 @@ export default {
           passBlockFinesse_rating: p.pass_block_finesse
         };
       });
+    },
+    nameSearch(query) {
+      this.nameQuery = query;
+    },
+    resetSearch() {
+      this.nameQuery = "";
     },
     sort(players) {
       this.isLoading = true;

@@ -5,7 +5,7 @@
   </p>
   <div class="panel-block">
     <p class="control has-icons-left">
-      <input class="input is-small" type="text" placeholder="search">
+      <input class="input is-small" type="text" placeholder="search" v-model="query" @keydown="nameSearch" @keyup.delete="resetSearch">
       <span class="icon is-small is-left">
         <i class="fas fa-search" aria-hidden="true"></i>
       </span>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import _ from "lodash";
+
 const filterBlocks = [
   {
     id: "positions",
@@ -52,8 +54,21 @@ export default {
   },
   data() {
     return {
-      filterBlocks: filterBlocks
+      filterBlocks: filterBlocks,
+      query: ""
     };
+  },
+  methods: {
+    nameSearch: _.debounce(function() {
+      if (this.query.length > 0) {
+        this.$eventHub.emit("search-by-name", this.query);
+      }
+    }, 400),
+    resetSearch: _.debounce(function() {
+      if (this.query.length === 0) {
+        this.$eventHub.emit("reset-search");
+      }
+    }, 400)
   }
 };
 </script>
