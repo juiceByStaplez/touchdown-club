@@ -14,9 +14,11 @@
 
 <script>
 import PositionFilters from "./PositionFilters";
+import FieldFilters from "./FieldFilters";
 
 export default {
   components: {
+    FieldFilters,
     PositionFilters
   },
   props: {

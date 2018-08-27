@@ -22,24 +22,9 @@ export default [
     sort: 0
   },
   {
-    abbreviation: "cth",
-    name: "catching_rating",
-    readable: "Catching",
-    enabled: 1,
-    sort: 0
-  },
-  {
     abbreviation: "brtck",
     name: "breakTackle_rating",
     readable: "Break Tackles",
-    enabled: 1,
-    sort: 0
-  },
-
-  {
-    abbreviation: "jmp",
-    name: "jumping_rating",
-    readable: "Jumping",
     enabled: 1,
     sort: 0
   },
@@ -102,26 +87,13 @@ export default [
     sort: 0
   },
   {
-    abbreviation: "thp",
-    name: "throwPower_rating",
-    readable: "Throw Power",
-    enabled: 1,
-    sort: 0
-  },
-  {
     abbreviation: "ret",
     name: "kickReturn_rating",
     readable: "Kick Return",
     enabled: 1,
     sort: 0
   },
-  {
-    abbreviation: "lblck",
-    name: "leadBlock_rating",
-    readable: "Lead Block",
-    enabled: 1,
-    sort: 0
-  },
+
   {
     abbreviation: "str",
     name: "strength_rating",
@@ -129,23 +101,21 @@ export default [
     enabled: 1,
     sort: 0
   },
-
-  {
-    abbreviation: "pa",
-    name: "playAction_rating",
-    readable: "Play Action",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "pur",
-    name: "pursuit_rating",
-    readable: "Pursuit",
-    enabled: 1,
-    sort: 0
-  },
-
   // WR Fields
+  {
+    abbreviation: "cth",
+    name: "catching_rating",
+    readable: "Catching",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "jmp",
+    name: "jumping_rating",
+    readable: "Jumping",
+    enabled: 1,
+    sort: 0
+  },
   {
     abbreviation: "cit",
     name: "catchInTraffic_rating",
@@ -181,44 +151,16 @@ export default [
     enabled: 1,
     sort: 0
   },
-  {
-    abbreviation: "fin",
-    name: "finesseMoves_rating",
-    readable: "Finesse Moves",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "pwr",
-    name: "powerMoves_rating",
-    readable: "Power Moves",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "rblck",
-    name: "runBlock_rating",
-    readable: "Run Block",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "tck",
-    name: "tackle_rating",
-    readable: "Tackle",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "inj",
-    name: "injury_rating",
-    readable: "Injury",
-    enabled: 1,
-    sort: 0
-  },
 
   // QB fields
 
+  {
+    abbreviation: "thp",
+    name: "throwPower_rating",
+    readable: "Throw Power",
+    enabled: 1,
+    sort: 0
+  },
   {
     abbreviation: "accS",
     name: "throwAccuracyShort_rating",
@@ -247,37 +189,6 @@ export default [
     enabled: 1,
     sort: 0
   },
-
-  {
-    abbreviation: "prc",
-    name: "playRecognition_rating",
-    readable: "Play Recognition",
-    enabled: 1,
-    sort: 0
-  },
-
-  {
-    abbreviation: "brksck",
-    name: "breakSack_rating",
-    readable: "Break Sack",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "rbp",
-    name: "runBlockPower_rating",
-    readable: "Run Block Power",
-    enabled: 1,
-    sort: 0
-  },
-
-  {
-    abbreviation: "tgh",
-    name: "toughness_rating",
-    readable: "Toughness",
-    enabled: 1,
-    sort: 0
-  },
   {
     abbreviation: "totr",
     name: "throwOnTheRun_rating",
@@ -286,38 +197,46 @@ export default [
     sort: 0
   },
   {
-    abbreviation: "mcv",
-    name: "manCoverage_rating",
-    readable: "Man Converage",
+    abbreviation: "pa",
+    name: "playAction_rating",
+    readable: "Play Action",
     enabled: 1,
     sort: 0
   },
   {
-    abbreviation: "zcv",
-    name: "zoneCoverage_rating",
-    readable: "Zone Coverage",
+    abbreviation: "brksck",
+    name: "breakSack_rating",
+    readable: "Break Sack",
     enabled: 1,
     sort: 0
   },
   {
-    abbreviation: "rls",
-    name: "release_rating",
-    readable: "Release",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "pwr",
-    name: "hitPower_rating",
-    readable: "Hit Power",
+    abbreviation: "tgh",
+    name: "toughness_rating",
+    readable: "Toughness",
     enabled: 1,
     sort: 0
   },
 
+  // blocking
   {
-    abbreviation: "kckA",
-    name: "kickAccuracy_rating",
-    readable: "Kick Accuracy",
+    abbreviation: "lblck",
+    name: "leadBlock_rating",
+    readable: "Lead Block",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "rblck",
+    name: "runBlock_rating",
+    readable: "Run Block",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "rbp",
+    name: "runBlockPower_rating",
+    readable: "Run Block Power",
     enabled: 1,
     sort: 0
   },
@@ -336,37 +255,9 @@ export default [
     sort: 0
   },
   {
-    abbreviation: "sta",
-    name: "stamina_rating",
-    readable: "Stamina",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "kp",
-    name: "kickPower_rating",
-    readable: "Kick Power",
-    enabled: 1,
-    sort: 0
-  },
-  {
     abbreviation: "pblck",
     name: "passBlock_rating",
     readable: "Pass Block",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "prs",
-    name: "press_rating",
-    readable: "Press",
-    enabled: 1,
-    sort: 0
-  },
-  {
-    abbreviation: "blshd",
-    name: "blockShedding_rating",
-    readable: "Block Shedding",
     enabled: 1,
     sort: 0
   },
@@ -381,6 +272,120 @@ export default [
     abbreviation: "pblckfin",
     name: "passBlockFinesse_rating",
     readable: "Pass Block Finesse",
+    enabled: 1,
+    sort: 0
+  },
+
+  // DB Fields
+  {
+    abbreviation: "mcv",
+    name: "manCoverage_rating",
+    readable: "Man Converage",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "zcv",
+    name: "zoneCoverage_rating",
+    readable: "Zone Coverage",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "prs",
+    name: "press_rating",
+    readable: "Press",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "prc",
+    name: "playRecognition_rating",
+    readable: "Play Recognition",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "rls",
+    name: "release_rating",
+    readable: "Release",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "pur",
+    name: "pursuit_rating",
+    readable: "Pursuit",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "sta",
+    name: "stamina_rating",
+    readable: "Stamina",
+    enabled: 1,
+    sort: 0
+  },
+
+  // Defensive Line
+  {
+    abbreviation: "blshd",
+    name: "blockShedding_rating",
+    readable: "Block Shedding",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "fin",
+    name: "finesseMoves_rating",
+    readable: "Finesse Moves",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "pwr",
+    name: "powerMoves_rating",
+    readable: "Power Moves",
+    enabled: 1,
+    sort: 0
+  },
+
+  // general defense
+
+  {
+    abbreviation: "pwr",
+    name: "hitPower_rating",
+    readable: "Hit Power",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "tck",
+    name: "tackle_rating",
+    readable: "Tackle",
+    enabled: 1,
+    sort: 0
+  },
+  // kicking
+  {
+    abbreviation: "kp",
+    name: "kickPower_rating",
+    readable: "Kick Power",
+    enabled: 1,
+    sort: 0
+  },
+  {
+    abbreviation: "kckA",
+    name: "kickAccuracy_rating",
+    readable: "Kick Accuracy",
+    enabled: 1,
+    sort: 0
+  },
+  // General low priority fields
+  {
+    abbreviation: "inj",
+    name: "injury_rating",
+    readable: "Injury",
     enabled: 1,
     sort: 0
   }

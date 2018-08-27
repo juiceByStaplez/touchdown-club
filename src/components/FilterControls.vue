@@ -44,6 +44,15 @@ const filterBlocks = [
     collapsible: true,
     component: "PositionFilters",
     icon: "fa-user-secret"
+  },
+  {
+    id: "fields",
+    status: 1,
+    title: "Fields",
+    collapsed: false,
+    collapsible: true,
+    component: "FieldFilters",
+    icon: "fa-user-edit"
   }
 ];
 import CollapsibleBlock from "./CollapsibleBlock";

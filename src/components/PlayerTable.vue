@@ -70,7 +70,7 @@ export default {
       nameQuery: "",
       players: [],
       positions: _.cloneDeep(positions),
-      rating_fields: fields,
+      rating_fields: _.cloneDeep(fields).slice(0, 11),
       sortBy: ["overall", "speed"],
       sortDir: ["desc", "desc"],
       sortDirectionLabels: ["desc", "asc"],
